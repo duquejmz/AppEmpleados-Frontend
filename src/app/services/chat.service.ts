@@ -8,7 +8,7 @@ import { Room } from 'src/app/models/room';
   providedIn: 'root'
 })
 export class ChatService {
-  private apiUrl = environment.apiUrl + '/chat';
+  private apiUrl = environment.apiUrl + '/api/chat';
 
   constructor(private http: HttpClient) { }
 

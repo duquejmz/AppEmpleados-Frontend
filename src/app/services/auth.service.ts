@@ -8,20 +8,27 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl + '/auth';
+  private apiUrl = environment.apiUrl + '/api/auth';
   private userIdKey = 'userId';
+  private userNameKey = 'userName';
 
   constructor(private http: HttpClient) { }
 
   register(user: any): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/register`, user).pipe(
-      tap(response => this.saveUserId(response.id))
+      tap(response => {
+        this.saveUserId(response.id);
+        this.saveUserName(response.name);
+      })
     );
   }
 
   login(credentials: any): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(response => this.saveUserId(response.id))
+      tap(response => {
+        this.saveUserId(response.id);
+        this.saveUserName(response.name);
+      })
     );
   }
 
@@ -29,8 +36,16 @@ export class AuthService {
     localStorage.setItem(this.userIdKey, userId);
   }
 
+  private saveUserName(userName: string) {
+    localStorage.setItem(this.userNameKey, userName);
+  }
+
   getUserId(): string | null {
     return localStorage.getItem(this.userIdKey);
+  }
+
+  getUserName(): string | null {
+    return localStorage.getItem(this.userNameKey);
   }
 
   isLoggedIn(): boolean {
@@ -39,5 +54,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.userIdKey);
+    localStorage.removeItem(this.userNameKey);
   }
 }

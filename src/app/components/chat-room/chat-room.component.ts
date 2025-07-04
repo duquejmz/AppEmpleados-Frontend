@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SignalrService } from '../../services/signalr.service';
@@ -28,7 +28,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private signalrService: SignalrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     if (roomCode) {
       this.roomCode = roomCode;
     }
-    const userName = this.authService.getUserId(); // Or a proper user name
+    const userName = this.authService.getUserName();
     if(userName) {
         this.userName = userName;
     }
@@ -67,5 +68,9 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       this.signalrService.sendMessage(this.roomCode, this.userName, message);
       this.messageForm.reset();
     }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/chat']);
   }
 }

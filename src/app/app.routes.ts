@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
-import { EmpleadosListComponent } from 'src/app/components/empleados-list/empleados-list.component';
-import { EmpleadoFormComponent } from 'src/app/components/empleados-form/empleados-form.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'empleados', pathMatch: 'full' },
-  { path: 'empleados', component: EmpleadosListComponent },
-  { path: 'empleados/nuevo', component: EmpleadoFormComponent },
-  { path: 'empleados/editar/:id', component: EmpleadoFormComponent }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'chat/:roomCode', component: ChatRoomComponent }
 ];

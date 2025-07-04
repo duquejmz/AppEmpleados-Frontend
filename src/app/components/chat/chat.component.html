@@ -1,0 +1,28 @@
+<div class="chat-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Create or Join a Room</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="forms-container">
+          <form [formGroup]="createRoomForm" (ngSubmit)="createRoom()" class="form">
+            <h3>Create Room</h3>
+            <mat-form-field appearance="fill">
+              <mat-label>Room Name</mat-label>
+              <input matInput formControlName="roomName">
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!createRoomForm.valid">Create</button>
+          </form>
+
+          <form [formGroup]="joinRoomForm" (ngSubmit)="joinRoom()" class="form">
+            <h3>Join Room</h3>
+            <mat-form-field appearance="fill">
+              <mat-label>Room Code</mat-label>
+              <input matInput formControlName="roomCode">
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!joinRoomForm.valid">Join</button>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>

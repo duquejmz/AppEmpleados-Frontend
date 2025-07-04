@@ -1,0 +1,23 @@
+.chat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  mat-card {
+    width: 800px;
+  }
+
+  .forms-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form {
+    width: 48%;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }

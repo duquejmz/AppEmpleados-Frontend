@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Detalles del Empleado</h2>
+<mat-dialog-content class="detalle-content">
+  <div class="detalle-item">
+    <strong>ID:</strong>
+    <span>{{ data.id }}</span>
+  </div>
+  <div class="detalle-item">
+    <strong>Nombre:</strong>
+    <span>{{ data.nombre }}</span>
+  </div>
+  <div class="detalle-item">
+    <strong>Correo:</strong>
+    <span>{{ data.correo }}</span>
+  </div>
+  <div class="detalle-item">
+    <strong>Cargo:</strong>
+    <span>{{ data.cargo || 'No especificado' }}</span>
+  </div>
+  <div class="detalle-item">
+    <strong>Departamento:</strong>
+    <span>{{ data.departamento || 'No especificado' }}</span>
+  </div>
+  <div class="detalle-item">
+    <strong>Teléfono:</strong>
+    <span>{{ data.telefono || 'No especificado' }}</span>
+  </div>
+  <div class="detalle-item">
+    <strong>Fecha de Ingreso:</strong>
+    <span>{{ data.fechaIngreso | date:'dd/MM/yyyy' }}</span>
+  </div>
+  <div class="detalle-item">
+    <strong>Activo:</strong>
+    <span>{{ data.activo ? 'Sí' : 'No' }}</span>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>

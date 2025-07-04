@@ -1,0 +1,67 @@
+<h2 class="titulo-formulario">
+  {{ empleadoId ? 'Editar empleado' : 'Crear empleado' }}
+</h2>
+<form [formGroup]="empleadoForm" (ngSubmit)="guardarEmpleado()" class="empleado-form">
+  <div *ngIf="erroresServidor.length > 0" class="errores-servidor">
+    <mat-icon color="warn">error</mat-icon>
+    <ul>
+      <li *ngFor="let err of erroresServidor">{{ err }}</li>
+    </ul>
+  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" required autocomplete="name">
+    <mat-error *ngIf="empleadoForm.get('nombre')?.hasError('required') && empleadoForm.get('nombre')?.touched">
+      El nombre es obligatorio
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Correo</mat-label>
+    <input matInput formControlName="correo" required type="email" autocomplete="email">
+    <mat-error *ngIf="empleadoForm.get('correo')?.hasError('required') && empleadoForm.get('correo')?.touched">
+      El correo es obligatorio
+    </mat-error>
+    <mat-error *ngIf="empleadoForm.get('correo')?.hasError('email') && empleadoForm.get('correo')?.touched">
+      Ingresa un correo válido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Cargo</mat-label>
+    <input matInput formControlName="cargo" autocomplete="organization-title">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Departamento</mat-label>
+    <input matInput formControlName="departamento" autocomplete="organization">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="telefono" type="tel" autocomplete="tel">
+    <mat-error *ngIf="empleadoForm.get('telefono')?.hasError('pattern') && empleadoForm.get('telefono')?.touched">
+      Ingresa un teléfono válido (puede incluir +, espacios, guiones o paréntesis)
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de Ingreso</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="fechaIngreso" required autocomplete="off" placeholder="Selecciona una fecha" [max]="maxFechaIngreso" readonly>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="empleadoForm.get('fechaIngreso')?.hasError('required') && empleadoForm.get('fechaIngreso')?.touched">
+      La fecha de ingreso es obligatoria
+    </mat-error>
+    <mat-error *ngIf="empleadoForm.get('fechaIngreso')?.hasError('matDatepickerParse') && empleadoForm.get('fechaIngreso')?.touched">
+      Ingresa una fecha válida
+    </mat-error>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="activo">Activo</mat-checkbox>
+
+  <div class="botones-formulario">
+    <button mat-raised-button color="primary" type="submit" [disabled]="empleadoForm.invalid">Guardar</button>
+    <button mat-button type="button" (click)="cerrar()">Cancelar</button>
+  </div>
+</form>

@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="tabla-contenedor">
+  <div class="spinner-container" *ngIf="cargando">
+    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <ng-container *ngIf="!cargando">
+    <app-empleados-datagrid
+      [empleados]="empleados"
+      (verDetalle)="verDetalle($event)"
+      (editar)="editarEmpleado($event)"
+      (eliminar)="eliminarEmpleado($event)"
+      (cambiarActivoEstado)="actualizarActivo($event)">
+    </app-empleados-datagrid>
+    <ng-container *ngIf="empleados.length === 0">
+      <section class="no-data" aria-label="Sin empleados">
+        <mat-icon class="icono-grande" aria-hidden="true">group</mat-icon>
+        <h2>¡No hay empleados registrados!</h2>
+        <p>Agrega tu primer empleado para comenzar a gestionar tu equipo.</p>
+        <button mat-raised-button color="primary" (click)="crearEmpleado()">
+          <mat-icon>person_add</mat-icon>
+          Nuevo Empleado
+        </button>
+      </section>
+    </ng-container>
+  </ng-container>
+</div>

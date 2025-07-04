@@ -1,0 +1,7 @@
+﻿import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-empleados-list',
+  template: '<h2>Lista de Empleados</h2>'
+})
+export class EmpleadosListComponent {}

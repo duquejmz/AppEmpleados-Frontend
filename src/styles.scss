@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+  font-family: 'Poppins', 'Roboto', Arial, Helvetica, sans-serif;
+}
+body { margin: 0; }
+
+html, body, .mat-typography, body *:not(mat-icon):not(.material-icons) {
+  font-family: 'Poppins', 'Roboto', Arial, Helvetica, sans-serif !important;
+}

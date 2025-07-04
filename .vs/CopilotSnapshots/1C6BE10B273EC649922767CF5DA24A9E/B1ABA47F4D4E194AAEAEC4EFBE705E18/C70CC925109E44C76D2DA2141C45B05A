@@ -1,0 +1,61 @@
+﻿import { Component, OnInit } from '@angular/core';
+import { EmpleadosService, Empleado } from 'src/app/services/empleados.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+@Component({
+  selector: 'app-empleados-list',
+  templateUrl: './empleados-list.component.html',
+  styleUrls: ['./empleados-list.component.scss']
+})
+export class EmpleadosListComponent implements OnInit {
+  empleados: Empleado[] = [];
+  displayedColumns: string[] = ['id', 'nombre', 'correo', 'cargo', 'departamento', 'telefono', 'fechaIngreso', 'activo', 'acciones'];
+  cargando = false;
+
+  constructor(
+    private empleadosService: EmpleadosService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
+
+  ngOnInit(): void {
+    this.obtenerEmpleados();
+  }
+
+  obtenerEmpleados(): void {
+    this.cargando = true;
+    this.empleadosService.getAll().subscribe({
+      next: (data) => {
+        this.empleados = data;
+        this.cargando = false;
+      },
+      error: () => {
+        this.snackBar.open('Error al cargar empleados', 'Cerrar', { duration: 3000 });
+        this.cargando = false;
+      }
+    });
+  }
+
+  editarEmpleado(id: number): void {
+    this.router.navigate(['/empleados/editar', id]);
+  }
+
+  eliminarEmpleado(id: number): void {
+    if (confirm('¿Estás segura de eliminar este empleado?')) {
+      this.empleadosService.delete(id).subscribe({
+        next: () => {
+          this.snackBar.open('Empleado eliminado con éxito', 'Cerrar', { duration: 3000 });
+          this.obtenerEmpleados();
+        },
+        error: () => {
+          this.snackBar.open('Error al eliminar empleado', 'Cerrar', { duration: 3000 });
+        }
+      });
+    }
+  }
+
+  crearEmpleado(): void {
+    this.router.navigate(['/empleados/nuevo']);
+  }
+}

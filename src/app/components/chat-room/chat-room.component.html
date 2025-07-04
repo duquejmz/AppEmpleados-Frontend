@@ -1,0 +1,23 @@
+<div class="chat-room-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Chat Room: {{ roomCode }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="chat-content">
+        <div class="message-list">
+          <div *ngFor="let msg of messages" class="message">
+            <strong>{{ msg.user }}:</strong> {{ msg.message }}
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <form [formGroup]="messageForm" (ngSubmit)="sendMessage()" class="message-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Message</mat-label>
+            <input matInput formControlName="message">
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!messageForm.valid">Send</button>
+        </form>
+      </mat-card-actions>
+    </mat-card>
+  </div>

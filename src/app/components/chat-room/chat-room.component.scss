@@ -1,0 +1,36 @@
+.chat-room-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  mat-card {
+    width: 800px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-content {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  .message-list {
+    padding: 16px;
+  }
+
+  .message {
+    margin-bottom: 8px;
+  }
+
+  .message-form {
+    display: flex;
+    padding: 16px;
+  }
+
+  mat-form-field {
+    flex-grow: 1;
+    margin-right: 16px;
+  }

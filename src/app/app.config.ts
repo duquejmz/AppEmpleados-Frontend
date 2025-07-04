@@ -7,6 +7,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 // Angular Material UI Modules
 import { importProvidersFrom } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -35,6 +36,7 @@ export const appConfig: ApplicationConfig = {
       MatDialogModule,
       MatDatepickerModule,
       MatNativeDateModule,
+      MatCardModule,
       FormsModule,
       ReactiveFormsModule
     )
